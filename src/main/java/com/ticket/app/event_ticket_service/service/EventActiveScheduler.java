@@ -18,8 +18,7 @@ public class EventActiveScheduler {
     public EventActiveScheduler(EventRepository repository) {
         this.repository = repository;
     }
-
-    // Run daily at 1 AM
+    
     @Async
     @Scheduled(cron = "0 0 1 * * ?")
     public void markInActiveEvents() {
