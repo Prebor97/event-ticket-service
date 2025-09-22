@@ -36,7 +36,7 @@ public class Event {
     @Column(name = "created_at", nullable = false)
     private LocalDate createdAt;
 
-    @Column(name = "updated_at", nullable = false)
+    @Column(name = "updated_at")
     private LocalDate updatedAt;
 
     @Column(name = "ticket_booked", nullable = false)
@@ -56,6 +56,7 @@ public class Event {
         if (this.eventId == null) {
             this.eventId = UUID.randomUUID().toString();
             this.createdAt = LocalDate.now();
+            this.updatedAt = LocalDate.now();
             this.status = true;
         }
     }

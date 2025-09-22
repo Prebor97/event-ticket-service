@@ -1,7 +1,9 @@
 package com.ticket.app.event_ticket_service.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class CreateUpdateEventDto {
@@ -9,12 +11,14 @@ public class CreateUpdateEventDto {
     private String name;
     @NotBlank(message = "description cannot be null")
     private String description;
-    @NotBlank(message = "Date cannot be null")
+    @NotNull(message = "Date cannot be null")
     private LocalDate eventDate;
     @NotBlank(message = "Location cannot be null")
     private String location;
-    @NotBlank(message = "Available tickets cannot be null")
+    @NotNull(message = "Available tickets cannot be null")
     private Integer availableTickets;
+    @NotNull(message = "Price cannot be null")
+    private BigDecimal price;
 
     public @NotBlank(message = "Name cannot be null") String getName() {
         return name;
@@ -32,11 +36,11 @@ public class CreateUpdateEventDto {
         this.description = description;
     }
 
-    public @NotBlank(message = "Date cannot be null") LocalDate getEventDate() {
+    public @NotNull(message = "Date cannot be null") LocalDate getEventDate() {
         return eventDate;
     }
 
-    public void setEventDate(@NotBlank(message = "Date cannot be null") LocalDate eventDate) {
+    public void setEventDate(@NotNull(message = "Date cannot be null") LocalDate eventDate) {
         this.eventDate = eventDate;
     }
 
@@ -48,12 +52,20 @@ public class CreateUpdateEventDto {
         this.location = location;
     }
 
-    public @NotBlank(message = "Available tickets cannot be null") Integer getAvailableTickets() {
+    public @NotNull(message = "Available tickets cannot be null") Integer getAvailableTickets() {
         return availableTickets;
     }
 
-    public void setAvailableTickets(@NotBlank(message = "Available tickets cannot be null") Integer availableTickets) {
+    public void setAvailableTickets(@NotNull(message = "Available tickets cannot be null") Integer availableTickets) {
         this.availableTickets = availableTickets;
+    }
+
+    public @NotNull(message = "Price cannot be null") BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(@NotNull(message = "Price cannot be null") BigDecimal price) {
+        this.price = price;
     }
 
     public CreateUpdateEventDto() {
