@@ -31,11 +31,6 @@ public class EventController {
     }
 
 
-    @GetMapping()
-    @PreAuthorize("hasRole('ROLE_USER')")
-    public String getEvents() {
-        return "You are authorized";
-    }
 
     @PostMapping("/create")
     @PreAuthorize("hasRole('ROLE_ADMIN')")

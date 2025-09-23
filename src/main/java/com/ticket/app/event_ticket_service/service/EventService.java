@@ -5,12 +5,10 @@ import com.ticket.app.event_ticket_service.dto.request.BookTicketDto;
 import com.ticket.app.event_ticket_service.dto.request.CreateUpdateEventDto;
 import com.ticket.app.event_ticket_service.dto.response.*;
 import com.ticket.app.event_ticket_service.exception.EventNotFoundException;
-import com.ticket.app.event_ticket_service.exception.TicketNotFoundException;
 import com.ticket.app.event_ticket_service.model.Event;
 import com.ticket.app.event_ticket_service.model.Ticket;
 import com.ticket.app.event_ticket_service.repository.EventRepository;
 import com.ticket.app.event_ticket_service.repository.TicketRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +18,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @Service
 public class EventService {
@@ -40,7 +37,8 @@ public class EventService {
         event.setDescription(eventDto.getDescription());
         event.setLocation(eventDto.getLocation());
         event.setEventDate(eventDto.getEventDate());
-        event.setAvailableTickets(eventDto.getAvailableTickets());
+        event.setTotalTickets(eventDto.getTotalTickets());
+        event.setAvailableTickets(eventDto.getTotalTickets());
         event.setPrice(eventDto.getPrice());
         eventRepository.save(event);
 
@@ -79,6 +77,11 @@ public class EventService {
         BigDecimal totalPrice = event.getPrice()
                 .multiply(BigDecimal.valueOf(ticketDto.getQuantity()));
 
+        event.setTicketBooked(ticketDto.getQuantity());
+        Integer availableTickets = event.getTotalTickets() - ticketDto.getQuantity();
+        event.setAvailableTickets(availableTickets);
+
+        eventRepository.save(event);
 
         Ticket ticket = new Ticket();
         ticket.setEvent(event);
@@ -104,7 +107,7 @@ public class EventService {
         event.setName(dto.getName());
         event.setDescription(dto.getDescription());
         event.setLocation(dto.getLocation());
-        event.setAvailableTickets(dto.getAvailableTickets());
+        event.setTotalTickets(dto.getTotalTickets());
         event.setEventDate(dto.getEventDate());
         event.setPrice(dto.getPrice());
         event.setUpdatedAt(LocalDate.now());

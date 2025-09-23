@@ -16,7 +16,7 @@ public class CreateUpdateEventDto {
     @NotBlank(message = "Location cannot be null")
     private String location;
     @NotNull(message = "Available tickets cannot be null")
-    private Integer availableTickets;
+    private Integer totalTickets;
     @NotNull(message = "Price cannot be null")
     private BigDecimal price;
 
@@ -52,12 +52,12 @@ public class CreateUpdateEventDto {
         this.location = location;
     }
 
-    public @NotNull(message = "Available tickets cannot be null") Integer getAvailableTickets() {
-        return availableTickets;
+    public @NotNull(message = "Available tickets cannot be null") Integer getTotalTickets() {
+        return totalTickets;
     }
 
-    public void setAvailableTickets(@NotNull(message = "Available tickets cannot be null") Integer availableTickets) {
-        this.availableTickets = availableTickets;
+    public void setTotalTickets(@NotNull(message = "Available tickets cannot be null") Integer totalTickets) {
+        this.totalTickets = totalTickets;
     }
 
     public @NotNull(message = "Price cannot be null") BigDecimal getPrice() {
@@ -76,6 +76,6 @@ public class CreateUpdateEventDto {
         this.description = description;
         this.eventDate = eventDate;
         this.location = location;
-        this.availableTickets = availableTickets;
+        this.totalTickets = availableTickets;
     }
 }
