@@ -29,6 +29,7 @@ public class EventActiveScheduler {
                 repository.save(event);
             }
         });
+
         log.info("Completed the event scanning");
     }
 }
